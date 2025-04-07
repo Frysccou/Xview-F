@@ -37,7 +37,7 @@ export const validator = {
 
 	validateForm: (
 		values: Record<string, string>,
-		rules: Record<string, (value: string) => ValidationResult[]>
+		rules: Record<string, ((value: string) => ValidationResult)[]>
 	): Record<string, string> => {
 		const errors: Record<string, string> = {};
 
