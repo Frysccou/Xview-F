@@ -8,13 +8,14 @@ import RelatedProductsSection from "@/components/products/[id]/RelatedProductsSe
 import { IProduct } from "@/types";
 
 type PageProps = {
-	params: {
+	params: Promise<{
 		productsID: string;
-	};
+	}>;
 };
 
 export default async function Page({ params }: PageProps) {
-	const productId = Number(params.productsID);
+	const { productsID } = await params;
+	const productId = Number(productsID);
 	const allProducts = await ApiService.getProducts();
 	const product: IProduct | null =
 		allProducts.find((p) => p.id === productId) || null;
