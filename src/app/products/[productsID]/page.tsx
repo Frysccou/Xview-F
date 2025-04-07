@@ -11,11 +11,13 @@ import RelatedProductsSection from "@/components/products/[id]/RelatedProductsSe
 import LoadingSpinner from "@/components/products/LoadingSpinner";
 import { IProduct } from "@/types";
 
-export default function Details({
-	params,
-}: {
-	params: { productsID: string };
-}) {
+interface PageProps {
+	params: {
+		productsID: string;
+	};
+}
+
+export default function Details({ params }: PageProps) {
 	const [product, setProduct] = useState<IProduct | null>(null);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(true);
@@ -25,7 +27,8 @@ export default function Details({
 			try {
 				const productId = Number(params.productsID);
 				const allProducts = await ApiService.getProducts();
-				const foundProduct = allProducts.find((p) => p.id === productId) || null;
+				const foundProduct =
+					allProducts.find((p) => p.id === productId) || null;
 				setProduct(foundProduct);
 				if (!foundProduct) {
 					setError("Producto no encontrado");
