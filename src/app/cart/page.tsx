@@ -1,6 +1,5 @@
-\"use client";
+"use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import CartItemList from "@/components/cart/CartItemList";
 import CartSummary from "@/components/cart/CartSummary";
 import EmptyCart from "@/components/cart/EmptyCart";
