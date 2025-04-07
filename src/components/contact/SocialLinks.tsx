@@ -10,19 +10,19 @@ const SocialLinks = () => {
 			</h3>
 			<div className="flex justify-center space-x-6">
 				<Link
-					href="#"
+					href="https://github.com/Frysccou"
 					className="text-white hover:text-[var(--pastel-purple)] transition-colors"
 				>
 					<Github size={34} />
 				</Link>
 				<Link
-					href="#"
+					href="https://www.instagram.com/frysccou/"
 					className="text-white hover:text-[var(--pastel-purple)] transition-colors"
 				>
 					<Instagram size={34} />
 				</Link>
 				<Link
-					href="#"
+					href="https://www.linkedin.com/in/francisco-espindola-ba3a50296/"
 					className="text-white hover:text-[var(--pastel-purple)] transition-colors"
 				>
 					<Linkedin size={34} />
