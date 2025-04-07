@@ -1,10 +1,9 @@
 "use client";
-export const dynamic = "force-dynamic";
 
 import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormInput } from "@/components/ui";
 import useForm from "@/hooks/auth/useForm";
 import useAuth from "@/hooks/useAuth";
@@ -13,7 +12,6 @@ import { showToast } from "@/components/ui/Toast";
 
 export default function Login() {
 	const router = useRouter();
-	const searchParams = useSearchParams();
 	const { login, isAuthenticated, isLoading } = useAuth();
 
 	useEffect(() => {
@@ -21,14 +19,15 @@ export default function Login() {
 			router.push("/home");
 		}
 
-		const registered = searchParams.get("registered");
+		const params = new URLSearchParams(window.location.search);
+		const registered = params.get("registered");
 		if (registered === "true") {
 			showToast({
 				message: "Registro exitoso. Ahora puedes iniciar sesión.",
 				type: "success",
 			});
 		}
-	}, [isAuthenticated, isLoading, router, searchParams]);
+	}, [isAuthenticated, isLoading, router]);
 
 	const {
 		values,
