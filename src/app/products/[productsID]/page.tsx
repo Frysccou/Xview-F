@@ -1,4 +1,3 @@
-import React from "react";
 import { ApiService } from "@/services/api.service";
 import ProductImageGallery from "@/components/products/[id]/ProductImageGallery";
 import ProductHeader from "@/components/products/[id]/ProductHeader";
@@ -8,13 +7,13 @@ import ProductInteractiveSection from "@/components/products/[id]/ProductInterac
 import RelatedProductsSection from "@/components/products/[id]/RelatedProductsSection";
 import { IProduct } from "@/types";
 
-interface DetailsPageProps {
+type PageProps = {
 	params: {
 		productsID: string;
 	};
-}
+};
 
-export default async function Details({ params }: DetailsPageProps) {
+export default async function Page({ params }: PageProps) {
 	const productId = Number(params.productsID);
 	const allProducts = await ApiService.getProducts();
 	const product: IProduct | null =
@@ -33,7 +32,6 @@ export default async function Details({ params }: DetailsPageProps) {
 			<div className="w-full max-w-6xl">
 				<div className="flex flex-col mb-12 md:flex-row md:gap-8">
 					<ProductImageGallery product={product} />
-
 					<div className="flex flex-col md:w-1/2">
 						<ProductHeader product={product} />
 						<ProductPricing product={product} />
@@ -41,7 +39,6 @@ export default async function Details({ params }: DetailsPageProps) {
 						<ProductInteractiveSection product={product} />
 					</div>
 				</div>
-
 				<RelatedProductsSection />
 			</div>
 		</div>
