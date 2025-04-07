@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, use } from "react";
+import React, { useEffect, useState } from "react";
 import { ApiService } from "@/services/api.service";
 import ProductImageGallery from "@/components/products/[id]/ProductImageGallery";
 import ProductHeader from "@/components/products/[id]/ProductHeader";
@@ -16,7 +16,6 @@ export default function Details({
 }: {
 	params: { productsID: string };
 }) {
-	const unwrappedParams = use(params);
 	const [product, setProduct] = useState<IProduct | null>(null);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(true);
@@ -24,8 +23,7 @@ export default function Details({
 	useEffect(() => {
 		const fetchProduct = async () => {
 			try {
-				setLoading(true);
-				const productId = Number(unwrappedParams.productsID);
+				const productId = Number(params.productsID);
 				const allProducts = await ApiService.getProducts();
 				const foundProduct = allProducts.find((p) => p.id === productId) || null;
 				setProduct(foundProduct);
@@ -41,7 +39,7 @@ export default function Details({
 		};
 
 		fetchProduct();
-	}, [unwrappedParams.productsID]);
+	}, [params.productsID]);
 
 	if (loading) {
 		return <LoadingSpinner />;
