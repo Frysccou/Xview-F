@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ApiService } from "@/services/api.service";
 import { IProduct } from "@/types";
 
@@ -74,7 +74,7 @@ const useProductSearch = () => {
 							} else if (typeof product.genres === "string") {
 								productGenres = JSON.parse(product.genres);
 							}
-						} catch (_) {
+						} catch (error) {
 							if (typeof product.genres === "string") {
 								productGenres = product.genres.split(',').map(g => g.trim());
 							}
@@ -85,8 +85,7 @@ const useProductSearch = () => {
 				});
 				
 				setGenres(Array.from(uniqueGenres).sort());
-				
-			} catch (_error) {
+			} catch (error) {
 				setError("Error al cargar los datos");
 			} finally {
 				setLoading(false);
@@ -125,7 +124,7 @@ const useProductSearch = () => {
 					} else if (typeof product.genres === "string") {
 						productGenres = JSON.parse(product.genres);
 					}
-				} catch (_) {
+				} catch (error) {
 					if (typeof product.genres === "string") {
 						productGenres = product.genres.split(',').map(g => g.trim());
 					}

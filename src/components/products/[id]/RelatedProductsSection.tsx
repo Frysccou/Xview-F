@@ -91,7 +91,7 @@ const RelatedProductsSection: React.FC = () => {
 									scrollSnapType: "x mandatory"
 								}}
 							>
-								{products.map((product, _) => (
+								{products.map((product) => (
 									<motion.div
 										key={product.id}
 										className="min-h-[180px] p-2 w-full flex-shrink-0 sm:w-auto"

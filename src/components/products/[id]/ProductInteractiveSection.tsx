@@ -11,7 +11,7 @@ const ProductInteractiveSection: React.FC<{ product: IProduct }> = ({
 	product,
 }) => {
 	const router = useRouter();
-	const { _quantity, calculateTotal } = useQuantityControl(product);
+	const { calculateTotal } = useQuantityControl(product);
 
 	const handleAddToCart = () => {
 		StorageService.addToCart({
