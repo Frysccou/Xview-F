@@ -173,6 +173,7 @@ export const StorageService = {
 		StorageService.setCart(updatedCart);
 	},
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	updateCartItemQuantity: (productId: number, quantity: number): void => {
 		const cart = StorageService.getCart();
 		const item = cart.find((item) => item.id === productId);
