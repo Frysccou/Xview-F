@@ -9,7 +9,7 @@ import useAuth from "@/hooks/useAuth";
 const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isProfileOpen, setIsProfileOpen] = useState(false);
-	const { isAuthenticated, user, logout } = useAuth();
+	const { isAuthenticated, _user, logout } = useAuth();
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
 	const toggleMenu = () => {

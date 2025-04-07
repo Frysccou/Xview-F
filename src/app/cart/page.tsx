@@ -9,7 +9,7 @@ import useCart from "@/hooks/cart/useCart";
 import useCheckout from "@/hooks/cart/useCheckout";
 
 export default function Cart() {
-	const router = useRouter();
+	const _router = useRouter();
 	const { cartItems, setCartItems, removeItem, clearCart, calculateTotal } =
 		useCart();
 	const {

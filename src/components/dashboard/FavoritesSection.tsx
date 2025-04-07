@@ -23,15 +23,18 @@ const FavoritesSection = () => {
 
 	useEffect(() => {
 		refreshFavorites();
-		
+
 		const handleFavoritesUpdated = () => {
 			refreshFavorites();
 		};
-		
-		window.addEventListener('favoritesUpdated', handleFavoritesUpdated);
-		
+
+		window.addEventListener("favoritesUpdated", handleFavoritesUpdated);
+
 		return () => {
-			window.removeEventListener('favoritesUpdated', handleFavoritesUpdated);
+			window.removeEventListener(
+				"favoritesUpdated",
+				handleFavoritesUpdated
+			);
 		};
 	}, []);
 
@@ -41,7 +44,7 @@ const FavoritesSection = () => {
 		window.dispatchEvent(new Event("favoritesUpdated"));
 	};
 
-	const formatPrice = (price: any): string => {
+	const formatPrice = (price: number | string): string => {
 		const numPrice = Number(price);
 		return isNaN(numPrice) ? "0.00" : numPrice.toFixed(2);
 	};
@@ -52,11 +55,11 @@ const FavoritesSection = () => {
 	const currentItems = favorites.slice(indexOfFirstItem, indexOfLastItem);
 
 	const goToNextPage = () => {
-		setCurrentPage(prev => Math.min(prev + 1, totalPages));
+		setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 	};
 
 	const goToPrevPage = () => {
-		setCurrentPage(prev => Math.max(prev - 1, 1));
+		setCurrentPage((prev) => Math.max(prev - 1, 1));
 	};
 
 	return (
@@ -110,7 +113,9 @@ const FavoritesSection = () => {
 											onClick={(e) => {
 												e.preventDefault();
 												e.stopPropagation();
-												handleRemoveFavorite(favorite.id);
+												handleRemoveFavorite(
+													favorite.id
+												);
 											}}
 											className="ml-2 p-2 bg-black/30 hover:bg-red-500/50 rounded-full transition-colors"
 											title="Eliminar de favoritos"
@@ -140,7 +145,9 @@ const FavoritesSection = () => {
 								<span className="bg-gradient-to-r from-[var(--pastel-purple)] to-[var(--pastel-salmon)] bg-clip-text text-transparent font-medium">
 									{currentPage}
 								</span>{" "}
-								<span className="text-gray-400">de {totalPages}</span>
+								<span className="text-gray-400">
+									de {totalPages}
+								</span>
 							</div>
 							<button
 								onClick={goToNextPage}

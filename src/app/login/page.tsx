@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -19,17 +19,23 @@ export default function Login() {
 		if (isAuthenticated && !isLoading) {
 			router.push("/home");
 		}
-		
+
 		const registered = searchParams.get("registered");
 		if (registered === "true") {
-			showToast({ 
-				message: "Registro exitoso. Ahora puedes iniciar sesión.", 
-				type: "success" 
+			showToast({
+				message: "Registro exitoso. Ahora puedes iniciar sesión.",
+				type: "success",
 			});
 		}
 	}, [isAuthenticated, isLoading, router, searchParams]);
 
-	const { values, handleChange, handleSubmit, isSubmitting, setIsSubmitting } = useForm(
+	const {
+		values,
+		handleChange,
+		handleSubmit,
+		isSubmitting,
+		setIsSubmitting,
+	} = useForm(
 		{ email: "", password: "" },
 		{
 			email: {
@@ -53,22 +59,22 @@ export default function Login() {
 				email: values.email,
 				password: values.password,
 			});
-			
-			showToast({ 
-				message: "¡Bienvenido! Inicio de sesión exitoso", 
+
+			showToast({
+				message: "¡Bienvenido! Inicio de sesión exitoso",
 				type: "success",
-				autoClose: 2000
+				autoClose: 2000,
 			});
-			
+
 			setTimeout(() => {
 				router.push("/home");
 			}, 1500);
-			
-		} catch (error) {
-			showToast({ 
-				message: "Credenciales incorrectas. Por favor, inténtalo de nuevo.", 
+		} catch (_error) {
+			showToast({
+				message:
+					"Credenciales incorrectas. Por favor, inténtalo de nuevo.",
 				type: "error",
-				autoClose: 4000
+				autoClose: 4000,
 			});
 			setIsSubmitting(false);
 		}

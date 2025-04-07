@@ -17,8 +17,8 @@ export const AuthContext = createContext<AuthContextType>({
 	user: null,
 	isAuthenticated: false,
 	isLoading: true,
-	login: async () => { return undefined; },
-	register: async () => { return undefined; },
+	login: async () => undefined,
+	register: async () => undefined,
 	logout: () => {},
 	error: null,
 });
@@ -54,7 +54,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			} else {
 				setUser(null);
 			}
-		} catch (error) {
+		} catch {
 			StorageService.clearSession();
 			setUser(null);
 		} finally {
@@ -67,10 +67,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	}, [initAuth]);
 
 	useEffect(() => {
-		if (!isLoading) {
-			if (!isAuthenticated && !publicRoutes[pathname || ""]) {
-				router.push("/login");
-			}
+		if (!isLoading && !isAuthenticated && !publicRoutes[pathname || ""]) {
+			router.push("/login");
 		}
 	}, [isAuthenticated, pathname, isLoading, router]);
 
@@ -84,12 +82,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				StorageService.setUserData(response.user);
 				setUser(response.user);
 				return response;
-			} else {
-				throw new Error("Respuesta de login inválida");
 			}
-		} catch (error: any) {
-			setError(error.message || "Error al iniciar sesión");
-			throw error;
+			throw new Error("Respuesta de login inválida");
+		} catch (error) {
+			const err = error as Error;
+			setError(err.message || "Error al iniciar sesión");
+			throw err;
 		} finally {
 			setIsLoading(false);
 		}
@@ -101,16 +99,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		try {
 			const registerResponse = await ApiService.register(data);
 			if (registerResponse) {
-				const loginResponse = await login({ 
-					email: data.email, 
-					password: data.password 
+				const loginResponse = await login({
+					email: data.email,
+					password: data.password,
 				});
 				return loginResponse;
 			}
 			throw new Error("Error en el registro");
-		} catch (error: any) {
-			setError(error.message || "Error al registrarse");
-			throw error;
+		} catch (error) {
+			const err = error as Error;
+			setError(err.message || "Error al registrarse");
+			throw err;
 		} finally {
 			setIsLoading(false);
 		}

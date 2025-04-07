@@ -1,7 +1,6 @@
 import React from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import useFAQ from "@/hooks/contact/useFAQ";
-import { FAQ } from "@/types";
 import { FAQAccordionProps } from "@/types";
 
 const FAQAccordion = ({ faqs }: FAQAccordionProps) => {

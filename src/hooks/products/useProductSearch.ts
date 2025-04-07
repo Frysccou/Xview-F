@@ -86,7 +86,7 @@ const useProductSearch = () => {
 				
 				setGenres(Array.from(uniqueGenres).sort());
 				
-			} catch (err) {
+			} catch (_error) {
 				setError("Error al cargar los datos");
 			} finally {
 				setLoading(false);
@@ -160,7 +160,7 @@ const useProductSearch = () => {
 		const startIndex = (currentPage - 1) * itemsPerPage;
 		const endIndex = startIndex + itemsPerPage;
 		setPaginatedProducts(filteredProducts.slice(startIndex, endIndex));
-	}, [filteredProducts, pagination.currentPage, pagination.itemsPerPage]);
+	}, [filteredProducts, pagination]);
 
 	const updateSearchQuery = useCallback((query: string) => {
 		setFilters(prev => ({ ...prev, searchQuery: query }));

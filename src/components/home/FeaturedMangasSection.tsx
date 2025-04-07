@@ -9,7 +9,7 @@ const FeaturedMangasSection = ({
 	mangas,
 	loading,
 }: FeaturedMangasSectionProps) => {
-	const [width, setWidth] = useState(0);
+	const [_width, setWidth] = useState(0);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const carousel = useRef<HTMLDivElement>(null);
 

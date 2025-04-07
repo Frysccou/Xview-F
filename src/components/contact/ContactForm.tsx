@@ -25,7 +25,6 @@ const ContactForm = () => {
 	);
 
 	const onSubmit = async () => {
-		console.log("Formulario enviado:", values);
 		showToast({
 			message: "Mensaje enviado correctamente",
 			type: "success",
@@ -52,7 +51,7 @@ const ContactForm = () => {
 						className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:border-[var(--pastel-purple)]"
 						placeholder="Tu nombre"
 						value={values.name}
-						onChange={handleChange}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
 					/>
 				</div>
 
@@ -69,7 +68,7 @@ const ContactForm = () => {
 						className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:border-[var(--pastel-purple)]"
 						placeholder="tu@email.com"
 						value={values.email}
-						onChange={handleChange}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
 					/>
 				</div>
 
@@ -86,7 +85,7 @@ const ContactForm = () => {
 						className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:border-[var(--pastel-purple)]"
 						placeholder="Asunto de tu mensaje"
 						value={values.subject}
-						onChange={handleChange}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
 					/>
 				</div>
 
@@ -103,7 +102,7 @@ const ContactForm = () => {
 						className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:border-[var(--pastel-purple)]"
 						placeholder="Escribe tu mensaje aquí..."
 						value={values.message}
-						onChange={handleChange as any}
+						onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleChange(e)}
 					/>
 				</div>
 
