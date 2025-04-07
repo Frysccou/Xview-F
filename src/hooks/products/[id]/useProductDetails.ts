@@ -18,7 +18,7 @@ const useProductDetails = (productId: number) => {
 				if (foundProduct) {
 					setProduct(foundProduct);
 				}
-			} catch (error) {
+			} catch {
 				setError("Error al cargar el producto");
 			} finally {
 				setLoading(false);

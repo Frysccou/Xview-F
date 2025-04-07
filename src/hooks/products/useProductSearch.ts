@@ -74,9 +74,9 @@ const useProductSearch = () => {
 							} else if (typeof product.genres === "string") {
 								productGenres = JSON.parse(product.genres);
 							}
-						} catch (error) {
+						} catch {
 							if (typeof product.genres === "string") {
-								productGenres = product.genres.split(',').map(g => g.trim());
+productGenres = (product.genres as string).split(',').map(g => g.trim());
 							}
 						}
 						
@@ -85,7 +85,7 @@ const useProductSearch = () => {
 				});
 				
 				setGenres(Array.from(uniqueGenres).sort());
-			} catch (error) {
+			} catch {
 				setError("Error al cargar los datos");
 			} finally {
 				setLoading(false);
@@ -124,9 +124,9 @@ const useProductSearch = () => {
 					} else if (typeof product.genres === "string") {
 						productGenres = JSON.parse(product.genres);
 					}
-				} catch (error) {
+				} catch {
 					if (typeof product.genres === "string") {
-						productGenres = product.genres.split(',').map(g => g.trim());
+productGenres = (product.genres as string).split(',').map(g => g.trim());
 					}
 				}
 

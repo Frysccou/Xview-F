@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState, useRef } from "react";
 import Card from "@/components/ui/Card";
 import LoadingIndicator from "./LoadingIndicator";
@@ -9,7 +10,7 @@ const FeaturedMangasSection = ({
 	mangas,
 	loading,
 }: FeaturedMangasSectionProps) => {
-	const [_width, setWidth] = useState(0);
+	const [width, setWidth] = useState(0);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const carousel = useRef<HTMLDivElement>(null);
 
