@@ -27,7 +27,7 @@ const useForm = <T extends FormValues>(
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { id, value } = e.target;
 		setValues((prev) => ({
 			...prev,
