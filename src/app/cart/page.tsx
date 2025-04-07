@@ -1,4 +1,4 @@
-"use client";
+\"use client";
 import React from "react";
 import { useRouter } from "next/navigation";
 import CartItemList from "@/components/cart/CartItemList";
@@ -9,7 +9,6 @@ import useCart from "@/hooks/cart/useCart";
 import useCheckout from "@/hooks/cart/useCheckout";
 
 export default function Cart() {
-	const _router = useRouter();
 	const { cartItems, setCartItems, removeItem, clearCart, calculateTotal } =
 		useCart();
 	const {
