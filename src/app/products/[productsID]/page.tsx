@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ApiService } from "@/services/api.service";
 import ProductImageGallery from "@/components/products/[id]/ProductImageGallery";
 import ProductHeader from "@/components/products/[id]/ProductHeader";
@@ -8,7 +6,6 @@ import ProductPricing from "@/components/products/[id]/ProductPricing";
 import ProductDescription from "@/components/products/[id]/ProductDescription";
 import ProductInteractiveSection from "@/components/products/[id]/ProductInteractiveSection";
 import RelatedProductsSection from "@/components/products/[id]/RelatedProductsSection";
-import LoadingSpinner from "@/components/products/LoadingSpinner";
 import { IProduct } from "@/types";
 
 interface DetailsPageProps {
@@ -17,43 +14,16 @@ interface DetailsPageProps {
 	};
 }
 
-export default function Details({ params }: DetailsPageProps) {
-	const [product, setProduct] = useState<IProduct | null>(null);
-	const [error, setError] = useState("");
-	const [loading, setLoading] = useState(true);
-
-	useEffect(() => {
-		const fetchProduct = async () => {
-			try {
-				const productId = Number(params.productsID);
-				const allProducts = await ApiService.getProducts();
-				const foundProduct =
-					allProducts.find((p) => p.id === productId) || null;
-				setProduct(foundProduct);
-				if (!foundProduct) {
-					setError("Producto no encontrado");
-				}
-			} catch (err) {
-				setError("Error al cargar el producto");
-				console.error(err);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		fetchProduct();
-	}, [params.productsID]);
-
-	if (loading) {
-		return <LoadingSpinner />;
-	}
+export default async function Details({ params }: DetailsPageProps) {
+	const productId = Number(params.productsID);
+	const allProducts = await ApiService.getProducts();
+	const product: IProduct | null =
+		allProducts.find((p) => p.id === productId) || null;
 
 	if (!product) {
 		return (
 			<div className="flex justify-center items-center min-h-screen">
-				<div className="text-white text-xl">
-					{error || "Producto no encontrado"}
-				</div>
+				<div className="text-white text-xl">Producto no encontrado</div>
 			</div>
 		);
 	}
