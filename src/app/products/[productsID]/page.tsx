@@ -11,14 +11,11 @@ import RelatedProductsSection from "@/components/products/[id]/RelatedProductsSe
 import LoadingSpinner from "@/components/products/LoadingSpinner";
 import { IProduct } from "@/types";
 
-type Props = {
-	params: {
-		productsID: string;
-	};
-	searchParams: Record<string, string | string[] | undefined>;
-};
-
-export default function Details({ params }: Props) {
+export default function Details({
+	params,
+}: {
+	params: { productsID: string };
+}) {
 	const [product, setProduct] = useState<IProduct | null>(null);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(true);
