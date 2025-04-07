@@ -1,3 +1,5 @@
+import { IUser } from "@/types";
+
 export const StorageService = {
 	setFavorites: (favorites: {
 		id: number;
@@ -99,7 +101,7 @@ export const StorageService = {
 		}
 	},
 
-	getUserData: (): { id: number; email: string; name: string } | null => {
+	getUserData: (): IUser | null => {
 		if (typeof document !== "undefined") {
 			const match = document.cookie.match(
 				/(^|;)\s*userData\s*=\s*([^;]+)/
