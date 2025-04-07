@@ -69,7 +69,7 @@ export default function Login() {
 			setTimeout(() => {
 				router.push("/home");
 			}, 1500);
-		} catch (_) {
+		} catch (error) {
 			showToast({
 				message:
 					"Credenciales incorrectas. Por favor, inténtalo de nuevo.",
