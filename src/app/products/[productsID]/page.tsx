@@ -11,11 +11,13 @@ import RelatedProductsSection from "@/components/products/[id]/RelatedProductsSe
 import LoadingSpinner from "@/components/products/LoadingSpinner";
 import { IProduct } from "@/types";
 
-export default function Details({
-	params,
-}: {
-	params: { productsID: string };
-}) {
+interface DetailsPageProps {
+	params: {
+		productsID: string;
+	};
+}
+
+export default function Details({ params }: DetailsPageProps) {
 	const [product, setProduct] = useState<IProduct | null>(null);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(true);
