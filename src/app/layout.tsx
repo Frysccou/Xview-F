@@ -25,12 +25,12 @@ export default function RootLayout({
 	return (
 		<html lang="es" style={{ height: "100%" }}>
 			<body
-				className={`${outfit.variable} antialiased gradient-bg h-full overflow-y-auto`}
+				className={`${outfit.variable} antialiased gradient-bg h-full min-h-screen`}
 			>
 				<NavigationProgress />
-				<div className="blob-1"></div>
-				<div className="blob-2"></div>
-				<div className="blob-3"></div>
+				<div className="blob-1 fixed z-0 pointer-events-none"></div>
+				<div className="blob-2 fixed z-0 pointer-events-none"></div>
+				<div className="blob-3 fixed z-0 pointer-events-none"></div>
 				<ToastProvider>
 					<AuthProvider>
 						<CartProvider>

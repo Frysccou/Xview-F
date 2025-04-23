@@ -2,18 +2,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { StorageService } from "@/services/storage.service";
 import { ApiService } from "@/services/api.service";
-import { CartItem } from "@/types";
 import { showToast } from "@/components/ui/Toast";
 import usePaymentForm from "./usePaymentForm";
+import useCart from "@/hooks/useCart";
 
-const useCheckout = (
-	cartItems: CartItem[],
-	setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>
-) => {
+const useCheckout = () => {
 	const [showCheckout, setShowCheckout] = useState(false);
 	const router = useRouter();
 	const { paymentInfo, formErrors, handleInputChange, validateForm } =
 		usePaymentForm();
+	const { cartItems, clearCart } = useCart();
 
 	const proceedToCheckout = () => {
 		setShowCheckout(true);
@@ -55,8 +53,7 @@ const useCheckout = (
 				products: productsWithQuantity,
 			});
 
-			StorageService.clearCart();
-			setCartItems([]);
+			clearCart();
 			setShowCheckout(false);
 			showToast({
 				message: "¡Compra realizada con éxito!",
@@ -66,7 +63,6 @@ const useCheckout = (
 				router.push("/products");
 			}, 1500);
 		} catch (error) {
-			console.error("Error al procesar la compra:", error);
 			showToast({
 				message: "Error al procesar tu compra. Inténtalo de nuevo.",
 				type: "error",
