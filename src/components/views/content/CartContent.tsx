@@ -24,7 +24,7 @@ const CartContent: React.FC<CartViewProps> = ({ showTitle = false }) => {
 		handleInputChange,
 		proceedToCheckout,
 		handlePaymentSubmit,
-	} = useCheckout(localCartItems, setLocalCartItems);
+	} = useCheckout();
 
 	return (
 		<>
