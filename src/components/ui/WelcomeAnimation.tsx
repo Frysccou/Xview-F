@@ -44,7 +44,7 @@ const WelcomeAnimation: React.FC<WelcomeAnimationProps> = ({ onComplete }) => {
 
 	return (
 		<motion.div
-			className="fixed inset-0 z-[9999] flex items-center justify-center glass-effect"
+			className="fixed inset-0 z-[9999] flex items-center justify-center glass-effect-for-welcome"
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
