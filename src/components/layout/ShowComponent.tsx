@@ -20,19 +20,38 @@ const ShowComponent: React.FC<ShowComponentProps> = ({ children }) => {
 		"/login",
 		"/register",
 		"/dashboard",
+		"/dashboard/orders",
 	];
 
-	const isOrders = pathname?.startsWith("/dashboard/");
-	const isProductDetail = pathname?.startsWith("/products/");
+	const protectedRoutes = [
+		"/dashboard",
+		"/cart",
+		"/contact",
+		"/dashboard/orders",
+	];
+
+	const isValidProductDetail =
+		pathname?.startsWith("/products/") && pathname?.split("/").length === 3;
+
+	const isInvalidDashboardRoute =
+		pathname?.startsWith("/dashboard/") &&
+		!protectedRoutes.includes(pathname || "");
+
+	const isInvalidProductRoute =
+		pathname?.startsWith("/products/") && !isValidProductDetail;
 
 	const showComponents =
-		validRoutes.includes(pathname || "") || isProductDetail || isOrders;
-		
+		validRoutes.includes(pathname || "") || isValidProductDetail;
+
 	return (
 		<>
-			{showComponents && <Navbar />}
+			{showComponents &&
+				!isInvalidDashboardRoute &&
+				!isInvalidProductRoute && <Navbar />}
 			<main>{children}</main>
-			{showComponents && <Footer />}
+			{showComponents &&
+				!isInvalidDashboardRoute &&
+				!isInvalidProductRoute && <Footer />}
 		</>
 	);
 };

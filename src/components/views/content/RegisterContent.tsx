@@ -31,15 +31,27 @@ export default function RegisterContent() {
 
 	const validationSchema = Yup.object().shape({
 		email: Yup.string()
-			.email("El correo electrónico es inválido")
+			.matches(
+				/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+				"El correo electrónico es inválido"
+			)
 			.required("El correo electrónico es obligatorio"),
 		password: Yup.string()
 			.min(6, "La contraseña debe tener al menos 6 caracteres")
+			.matches(
+				/[A-Z]/,
+				"La contraseña debe contener al menos una letra mayúscula"
+			)
+			.matches(/[0-9]/, "La contraseña debe contener al menos un número")
+			.matches(
+				/[!@#$%^&*(),.?":{}|<>]/,
+				"La contraseña debe contener al menos un carácter especial"
+			)
 			.required("La contraseña es obligatoria"),
 		name: Yup.string().required("El nombre es obligatorio"),
 		address: Yup.string().required("La dirección es obligatoria"),
 		phone: Yup.string()
-			.matches(/^[0-9+\s-]*$/, "El formato del teléfono es inválido")
+			.matches(/^[0-9+\s-]+$/, "El teléfono solo debe contener números")
 			.required("El número de teléfono es obligatorio"),
 	});
 
@@ -49,15 +61,32 @@ export default function RegisterContent() {
 	) => {
 		try {
 			await ApiService.register(values);
-			router.push("/login?registered=true");
-		} catch (error) {
 			showToast({
 				message:
-					error instanceof Error
-						? error.message
-						: "Error durante el registro",
+					"¡Registro exitoso! Redirigiendo al inicio de sesión...",
+				type: "success",
+			});
+			setTimeout(() => {
+				router.push("/login?registered=true");
+			}, 1500);
+		} catch (error) {
+			let errorMessage = "Error durante el registro";
+
+			if (error instanceof Error) {
+				errorMessage = error.message;
+			} else if (
+				typeof error === "object" &&
+				error !== null &&
+				"message" in error
+			) {
+				errorMessage = String((error as any).message);
+			}
+
+			showToast({
+				message: errorMessage,
 				type: "error",
 			});
+
 			setSubmitting(false);
 		}
 	};

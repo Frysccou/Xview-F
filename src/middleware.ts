@@ -10,7 +10,6 @@ export function middleware(request: NextRequest) {
 		"/dashboard",
 		"/cart",
 		"/contact",
-		"/profile",
 		"/dashboard/orders",
 	];
 
@@ -41,11 +40,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: [
-		"/dashboard",
-		"/dashboard/:path*",
-		"/cart",
-		"/contact",
-		"/profile",
-	],
+	matcher: ["/dashboard", "/dashboard/:path*", "/cart", "/contact"],
 };
