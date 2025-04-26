@@ -7,6 +7,8 @@ const SkeletonCardContainer = () => {
 			<SkeletonCard />
 			<SkeletonCard />
 			<SkeletonCard />
+			<SkeletonCard />
+			<SkeletonCard />
 		</div>
 	);
 };
