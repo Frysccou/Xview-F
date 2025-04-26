@@ -3,12 +3,17 @@ import SkeletonCard from "./SkeletonCard";
 
 const SkeletonCardContainer = () => {
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+		<div className="flex flex-col md:flex-row md:gap-6 max-w-6xl p-4 lg:px-8 xl:px-16 mx-auto sm:mx-0 justify-center">
 			<SkeletonCard />
-			<SkeletonCard />
-			<SkeletonCard />
-			<SkeletonCard />
-			<SkeletonCard />
+			<div className="hidden md:block">
+				<SkeletonCard />
+			</div>
+			<div className="hidden md:block">
+				<SkeletonCard />
+			</div>
+			<div className="hidden md:block">
+				<SkeletonCard />
+			</div>
 		</div>
 	);
 };
