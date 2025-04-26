@@ -1,9 +1,5 @@
 import React from "react";
-
-interface GradientTextProps {
-	children: React.ReactNode;
-	className?: string;
-}
+import { GradientTextProps } from "@/types";
 
 const GradientText = ({ children, className = "" }: GradientTextProps) => {
 	return (

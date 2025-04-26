@@ -1,20 +1,8 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { OrderSortOption } from "@/hooks/dashboard/[orders]/useOrders";
+import { OrderSortOption, OrdersFilterProps } from "@/types";
 import { Search, ChevronDown } from "lucide-react";
-
-interface OrdersFilterProps {
-	searchQuery: string;
-	sortOption: OrderSortOption;
-	priceRange?: {
-		min: number | null;
-		max: number | null;
-	};
-	onSearchChange: (query: string) => void;
-	onSortChange: (option: OrderSortOption) => void;
-	onPriceRangeChange?: (min: number | null, max: number | null) => void;
-}
 
 const sortOptions: { value: OrderSortOption; label: string }[] = [
 	{ value: "date-desc", label: "Fecha: Más recientes" },

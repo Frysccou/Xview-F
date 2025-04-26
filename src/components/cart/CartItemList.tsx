@@ -1,11 +1,6 @@
 import React from "react";
 import CartItem from "./CartItem";
-import { CartItem as CartItemType } from "@/types";
-
-interface CartItemListProps {
-	items: CartItemType[];
-	onRemoveItem: (id: number) => void;
-}
+import { CartItem as CartItemType, CartItemListProps } from "@/types";
 
 const CartItemList: React.FC<CartItemListProps> = ({ items, onRemoveItem }) => {
 	return (

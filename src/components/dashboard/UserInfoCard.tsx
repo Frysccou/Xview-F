@@ -1,11 +1,6 @@
 import React from "react";
-import { IUser } from "@/types";
+import { IUser, UserInfoCardProps } from "@/types";
 import LogoutButton from "./LogoutButton";
-
-interface UserInfoCardProps {
-	user: IUser;
-	onLogout: () => void;
-}
 
 const UserInfoCard = ({ user, onLogout }: UserInfoCardProps) => {
 	return (

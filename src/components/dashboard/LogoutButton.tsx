@@ -1,8 +1,5 @@
 import React from "react";
-
-interface LogoutButtonProps {
-	onLogout: () => void;
-}
+import { LogoutButtonProps } from "@/types";
 
 const LogoutButton = ({ onLogout }: LogoutButtonProps) => {
 	return (

@@ -9,8 +9,7 @@ import useCart from "@/hooks/useCart";
 const useCheckout = () => {
 	const [showCheckout, setShowCheckout] = useState(false);
 	const router = useRouter();
-	const { paymentInfo, formErrors, handleInputChange, validateForm } =
-		usePaymentForm();
+	const { paymentInfo, formErrors, handleInputChange, validateForm } = usePaymentForm();
 	const { cartItems, clearCart } = useCart();
 
 	const proceedToCheckout = () => {

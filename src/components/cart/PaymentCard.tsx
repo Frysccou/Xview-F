@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CreditCard } from "lucide-react";
 import { ApiService } from "@/services/api.service";
-
-interface PaymentCardProps {
-	cardNumber: string;
-	cardHolder: string;
-	expiryDate: string;
-	cvv: string;
-	isFlipped: boolean;
-}
+import { PaymentCardProps } from "@/types";
 
 const PaymentCard: React.FC<PaymentCardProps> = ({
 	cardNumber,

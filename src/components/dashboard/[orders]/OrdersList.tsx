@@ -1,10 +1,6 @@
 import React from "react";
-import { IOrder } from "@/types";
+import { OrdersListProps } from "@/types";
 import Image from "next/image";
-
-interface OrdersListProps {
-	orders: IOrder[];
-}
 
 const OrdersList = ({ orders }: OrdersListProps) => {
 	if (orders.length === 0) {
@@ -57,7 +53,10 @@ const OrdersList = ({ orders }: OrdersListProps) => {
 	return (
 		<div className="space-y-4 md:space-y-6">
 			{orders.map((order) => (
-				<div key={order.id} className="p-4 md:p-6 glass-effect rounded-lg">
+				<div
+					key={order.id}
+					className="p-4 md:p-6 glass-effect rounded-lg"
+				>
 					<div className="flex flex-col gap-2 md:flex-row md:justify-between md:items-center mb-3 md:mb-4">
 						<h3 className="text-lg md:text-xl font-semibold text-white">
 							Orden #{order.id}

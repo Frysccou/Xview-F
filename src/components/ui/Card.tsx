@@ -1,13 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-interface CardProps {
-	id: string;
-	title?: string;
-	imageUrl: string;
-	className?: string;
-}
+import { CardProps } from "@/types";
 
 const Card: FC<CardProps> = ({ id, imageUrl, className = "", title = "" }) => {
 	return (

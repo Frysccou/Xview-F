@@ -2,10 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { WelcomeAnimationProps } from "@/types";
 
-interface WelcomeAnimationProps {
-	onComplete: () => void;
-}
 
 const WelcomeAnimation: React.FC<WelcomeAnimationProps> = ({ onComplete }) => {
 	const [currentMessageIndex, setCurrentMessageIndex] = useState<number>(0);

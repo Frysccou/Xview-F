@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React from "react";
 import {
 	ToastContainer,
 	toast,
@@ -8,25 +8,10 @@ import {
 	TypeOptions,
 } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastProps, ToastProviderProps } from "@/types";
 
 const activeToasts: Record<string, number> = {};
 
-interface ToastProps {
-	message: string;
-	type?: TypeOptions;
-	autoClose?: number;
-	position?:
-		| "top-right"
-		| "top-center"
-		| "top-left"
-		| "bottom-right"
-		| "bottom-center"
-		| "bottom-left";
-}
-
-interface ToastProviderProps {
-	children: ReactNode;
-}
 
 export const showToast = ({
 	message,

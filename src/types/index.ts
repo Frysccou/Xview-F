@@ -138,6 +138,11 @@ export interface ProductCardProps {
 	onAddToCart: (product: IProduct) => void;
 }
 
+export interface ProductGridProps {
+	products: IProduct[];
+	onAddToCart: (product: IProduct) => void;
+}
+
 export interface ActionButtonsProps {
 	onAddToCart: () => void;
 	product: IProduct | null;
@@ -184,3 +189,234 @@ export interface RequestOptions {
 	headers?: Record<string, string>;
 	body?: Record<string, unknown>;
 }
+
+// ==========================================
+// Componentes de Carrito
+// ==========================================
+export interface CartItemProps {
+	item: CartItem;
+	onRemove: (id: number) => void;
+}
+
+export interface CartItemListProps {
+	items: CartItem[];
+	onRemoveItem: (id: number) => void;
+}
+
+export interface CartSummaryProps {
+	total: number;
+	onClearCart: () => void;
+	onCheckout: () => void;
+}
+
+export interface CheckoutFormProps {
+	paymentInfo: {
+		cardNumber: string;
+		cardHolder: string;
+		expiryDate: string;
+		cvv: string;
+		dni: string;
+		address: string;
+	};
+	formErrors: {
+		cardNumber: boolean;
+		cardHolder: boolean;
+		expiryDate: boolean;
+		cvv: boolean;
+		dni: boolean;
+		address: boolean;
+	};
+	onInputChange: (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => void;
+	onSubmit: (e: React.FormEvent) => Promise<void>;
+}
+
+export interface CheckoutSectionProps {
+	showCheckout: boolean;
+	paymentInfo: {
+		cardNumber: string;
+		cardHolder: string;
+		expiryDate: string;
+		cvv: string;
+		dni: string;
+		address: string;
+	};
+	formErrors: {
+		cardNumber: boolean;
+		cardHolder: boolean;
+		expiryDate: boolean;
+		cvv: boolean;
+		dni: boolean;
+		address: boolean;
+	};
+	onInputChange: (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => void;
+	onSubmit: (e: React.FormEvent) => Promise<void>;
+}
+
+export interface PaymentCardProps {
+	cardNumber: string;
+	cardHolder: string;
+	expiryDate: string;
+	cvv: string;
+	isFlipped: boolean;
+}
+
+export interface PaymentFieldProps {
+	id: string;
+	label: string;
+	type: string;
+	placeholder: string;
+	value: string;
+	error: boolean;
+	onChange: (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => void;
+	maxLength?: number;
+}
+
+export interface CartViewProps {
+	showTitle?: boolean;
+}
+
+// ==========================================
+// Componentes de Dashboard
+// ==========================================
+export interface LogoutButtonProps {
+	onLogout: () => void;
+}
+
+export interface ProfileAvatarProps {
+	user: IUser;
+}
+
+export interface UserInfoCardProps {
+	user: IUser;
+	onLogout: () => void;
+}
+
+export interface OrdersFilterProps {
+	searchQuery: string;
+	sortOption: OrderSortOption;
+	priceRange?: {
+		min: number | null;
+		max: number | null;
+	};
+	onSearchChange: (query: string) => void;
+	onSortChange: (option: OrderSortOption) => void;
+	onPriceRangeChange?: (min: number | null, max: number | null) => void;
+}
+
+export interface OrdersListProps {
+	orders: IOrder[];
+}
+
+// ==========================================
+// Componentes de Layout
+// ==========================================
+export interface ShowComponentProps {
+	children: React.ReactNode;
+}
+
+// ==========================================
+// Componentes de UI
+// ==========================================
+export interface ButtonPrimaryProps {
+	href: string;
+	children: React.ReactNode;
+	className?: string;
+	onClick?: () => void;
+}
+
+export interface ButtonSecondaryProps {
+	href: string;
+	children: React.ReactNode;
+	className?: string;
+	onClick?: () => void;
+}
+
+export interface CardProps {
+	id: string;
+	title?: string;
+	imageUrl: string;
+	className?: string;
+}
+
+export interface GradientTextProps {
+	children: React.ReactNode;
+	className?: string;
+}
+
+export interface SidebarProps {
+	activeTab: string;
+	setActiveTab: (tab: string) => void;
+}
+
+export interface ToastProps {
+	message: string;
+	type?: "success" | "error" | "warning" | "info";
+	autoClose?: number;
+	position?:
+		| "top-right"
+		| "top-center"
+		| "top-left"
+		| "bottom-right"
+		| "bottom-center"
+		| "bottom-left";
+}
+
+export interface ToastProviderProps {
+	children: React.ReactNode;
+}
+
+export interface WelcomeAnimationProps {
+	onComplete: () => void;
+}
+
+// ==========================================
+// Contextos
+// ==========================================
+export interface CartContextType {
+	cartItems: CartItem[];
+	cartCount: number;
+	addToCart: (item: CartItem) => void;
+	removeFromCart: (id: number) => void;
+	clearCart: () => void;
+	isInCart: (id: number) => boolean;
+	calculateTotal: () => number;
+}
+
+// ==========================================
+// Hooks
+// ==========================================
+export type OrderSortOption =
+	| "date-desc"
+	| "date-asc"
+	| "price-desc"
+	| "price-asc"
+	| "quantity-desc"
+	| "quantity-asc";
+
+export type SortOption =
+	| "relevancy"
+	| "price-low-high"
+	| "price-high-low"
+	| "name-a-z"
+	| "name-z-a"
+	| "stock-low-high"
+	| "stock-high-low";
+
+export interface ProductFilters {
+	categories: number[];
+	genres: string[];
+	searchQuery: string;
+	sortOption: SortOption;
+	priceRange: {
+		min: number | null;
+		max: number | null;
+	};
+}
+
+

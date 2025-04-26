@@ -4,9 +4,7 @@ import React, { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-interface ShowComponentProps {
-	children: ReactNode;
-}
+import { ShowComponentProps } from "@/types";
 const ShowComponent: React.FC<ShowComponentProps> = ({ children }) => {
 	const pathname = usePathname();
 

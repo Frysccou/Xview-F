@@ -3,29 +3,7 @@ import { CreditCard } from "lucide-react";
 import PaymentField from "./PaymentField";
 import PaymentCard from "./PaymentCard";
 import { showToast } from "../ui/Toast";
-
-interface CheckoutFormProps {
-	paymentInfo: {
-		cardNumber: string;
-		cardHolder: string;
-		expiryDate: string;
-		cvv: string;
-		dni: string;
-		address: string;
-	};
-	formErrors: {
-		cardNumber: boolean;
-		cardHolder: boolean;
-		expiryDate: boolean;
-		cvv: boolean;
-		dni: boolean;
-		address: boolean;
-	};
-	onInputChange: (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => void;
-	onSubmit: (e: React.FormEvent) => Promise<void>;
-}
+import { CheckoutFormProps } from "@/types";
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({
 	paymentInfo,

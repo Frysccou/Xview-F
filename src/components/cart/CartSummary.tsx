@@ -1,10 +1,5 @@
 import React from "react";
-
-interface CartSummaryProps {
-	total: number;
-	onClearCart: () => void;
-	onCheckout: () => void;
-}
+import { CartSummaryProps } from "@/types";
 
 const CartSummary: React.FC<CartSummaryProps> = ({
 	total,

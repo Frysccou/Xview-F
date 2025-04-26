@@ -1,10 +1,6 @@
 import React from "react";
 import { useRouter } from "next/navigation";
-
-interface SidebarProps {
-	activeTab: string;
-	setActiveTab: (tab: string) => void;
-}
+import { SidebarProps } from "@/types";
 
 const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
 	const router = useRouter();

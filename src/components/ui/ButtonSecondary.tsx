@@ -1,12 +1,6 @@
 import React from "react";
 import Link from "next/link";
-
-interface ButtonSecondaryProps {
-	href: string;
-	children: React.ReactNode;
-	className?: string;
-	onClick?: () => void;
-}
+import { ButtonSecondaryProps } from "@/types";
 
 const ButtonSecondary = ({
 	href,

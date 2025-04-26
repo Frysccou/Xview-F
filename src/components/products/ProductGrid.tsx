@@ -1,11 +1,7 @@
 import { FC } from "react";
-import { IProduct } from "@/types";
+import { IProduct, ProductGridProps } from "@/types";
 import ProductCard from "./ProductCard";
 
-interface ProductGridProps {
-	products: IProduct[];
-	onAddToCart: (product: IProduct) => void;
-}
 
 const ProductGrid: FC<ProductGridProps> = ({ products, onAddToCart }) => {
 	if (products.length === 0) {

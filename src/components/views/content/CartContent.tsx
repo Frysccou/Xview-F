@@ -7,11 +7,8 @@ import EmptyCart from "@/components/cart/EmptyCart";
 import CheckoutForm from "@/components/cart/CheckoutForm";
 import useCart from "@/hooks/useCart";
 import useCheckout from "@/hooks/cart/useCheckout";
-import { CartItem } from "@/types";
+import { CartItem, CartViewProps } from "@/types";
 
-interface CartViewProps {
-	showTitle?: boolean;
-}
 
 const CartContent: React.FC<CartViewProps> = ({ showTitle = false }) => {
 	const { cartItems, removeFromCart, clearCart, calculateTotal } = useCart();

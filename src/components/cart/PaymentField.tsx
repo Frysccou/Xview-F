@@ -1,17 +1,5 @@
 import React from "react";
-
-interface PaymentFieldProps {
-	id: string;
-	label: string;
-	type: string;
-	placeholder: string;
-	value: string;
-	error: boolean;
-	onChange: (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => void;
-	maxLength?: number;
-}
+import { PaymentFieldProps } from "@/types";
 
 const PaymentField: React.FC<PaymentFieldProps> = ({
 	id,

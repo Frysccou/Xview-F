@@ -1,12 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
-import { CartItem as CartItemType } from "@/types";
-
-interface CartItemProps {
-	item: CartItemType;
-	onRemove: (id: number) => void;
-}
+import { CartItem as CartItemType, CartItemProps } from "@/types";
 
 const CartItem: React.FC<CartItemProps> = ({ item, onRemove }) => {
 	return (

@@ -1,9 +1,6 @@
 import React from "react";
-import { IUser } from "@/types";
-
-interface ProfileAvatarProps {
-	user: IUser;
-}
+import Image from "next/image";
+import { ProfileAvatarProps } from "@/types";
 
 const ProfileAvatar = ({ user }: ProfileAvatarProps) => {
 	return (
