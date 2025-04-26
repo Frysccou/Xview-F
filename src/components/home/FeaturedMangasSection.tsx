@@ -3,7 +3,7 @@ import Card from "@/components/ui/Card";
 import { FeaturedMangasSectionProps } from "@/types";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import SkeletonCard from "../ui/SkeletonCard";
+import SkeletonCardContainer from "../ui/SkeletonCardContainer";
 
 const FeaturedMangasSection = ({
 	mangas,
@@ -53,7 +53,7 @@ const FeaturedMangasSection = ({
 
 			{loading ? (
 				<div className="flex justify-center">
-					<SkeletonCard />
+					<SkeletonCardContainer />
 				</div>
 			) : (
 				<>
