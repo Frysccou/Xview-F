@@ -8,6 +8,7 @@ import ProductPricing from "@/components/products/[id]/ProductPricing";
 import ProductDescription from "@/components/products/[id]/ProductDescription";
 import ProductInteractiveSection from "@/components/products/[id]/ProductInteractiveSection";
 import RelatedProductsSection from "@/components/products/[id]/RelatedProductsSection";
+import InfoSection from "@/components/products/[id]/InfoSection";
 import LoadingSpinner from "@/components/products/LoadingSpinner";
 import { IProduct } from "@/types";
 
@@ -63,6 +64,7 @@ export default function ProductDetailsContent({
 						<ProductHeader product={product} />
 						<ProductPricing product={product} />
 						<ProductDescription product={product} />
+						<InfoSection />
 						<ProductInteractiveSection product={product} />
 					</div>
 				</div>
