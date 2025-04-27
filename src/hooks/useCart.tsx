@@ -15,6 +15,12 @@ const useCart = (): CartContextType => {
 			clearCart: () => {},
 			isInCart: () => false,
 			calculateTotal: () => 0,
+			paginatedCartItems: [],
+			cartCurrentPage: 1,
+			cartTotalPages: 1,
+			goToCartPage: () => {},
+			goToNextCartPage: () => {},
+			goToPrevCartPage: () => {},
 		};
 	}
 
