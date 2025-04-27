@@ -10,6 +10,7 @@ import { FormInput } from "@/components/ui";
 import useAuth from "@/hooks/useAuth";
 import { showToast } from "@/components/ui/Toast";
 import WelcomeAnimation from "@/components/ui/WelcomeAnimation";
+import GradientText from "@/components/ui/GradientText";
 
 export default function LoginContent() {
 	const router = useRouter();
@@ -74,7 +75,7 @@ export default function LoginContent() {
 			<div className="flex flex-col md:flex-row items-center justify-center min-h-[calc(100vh-120px)] px-4 py-8">
 				<div className="p-8 w-full max-w-md shadow-xl glass-effect md:mr-8">
 					<h1 className="mb-6 text-3xl font-bold text-center text-white">
-						Iniciar Sesión
+						<GradientText>Iniciar Sesión</GradientText>
 					</h1>
 
 					<Formik

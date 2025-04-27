@@ -1,13 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import GradientText from "@/components/ui/GradientText";
 
 const AboutUsSection = () => {
 	return (
 		<section className="mb-16 w-full max-w-6xl">
 			<h2 className="mb-8 text-4xl font-bold text-center text-white md:text-5xl">
-				<span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--pastel-purple)] to-[var(--pastel-salmon)]">
-					Nuestra Historia
-				</span>
+				<GradientText>Nuestra Historia</GradientText>
 			</h2>
 			<div className="flex flex-col gap-8 md:flex-row">
 				<div className="p-6 w-full md:w-1/2 glass-effect">
@@ -25,7 +24,7 @@ const AboutUsSection = () => {
 
 				<div className="p-6 w-full md:w-1/2 glass-effect">
 					<h3 className="mb-4 text-2xl font-semibold text-white">
-						Quiénes Somos
+						<GradientText>Quiénes Somos</GradientText>
 					</h3>
 					<p className="mb-4 text-white/80">
 						XView nació de la pasión por el manga y la tecnología.

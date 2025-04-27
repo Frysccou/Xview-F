@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { FormInput } from "@/components/ui";
 import useAuth from "@/hooks/useAuth";
 import { showToast } from "@/components/ui/Toast";
+import GradientText from "@/components/ui/GradientText";
 
 export default function RegisterContent() {
 	const router = useRouter();
@@ -95,7 +96,7 @@ export default function RegisterContent() {
 		<div className="flex flex-col md:flex-row-reverse items-center justify-center min-h-[calc(100vh-120px)] px-4 py-8">
 			<div className="p-8 w-full max-w-md shadow-xl glass-effect md:ml-8">
 				<h1 className="mb-6 text-3xl font-bold text-center text-white">
-					Registro
+					<GradientText>Registro</GradientText>
 				</h1>
 
 				<Formik

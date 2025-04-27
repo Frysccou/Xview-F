@@ -43,6 +43,12 @@ const useOrders = () => {
 		min: null,
 		max: null,
 	});
+	const [pagination, setPagination] = useState({
+		currentPage: 1,
+		itemsPerPage: 5,
+		totalPages: 1,
+	});
+	const [paginatedOrders, setPaginatedOrders] = useState<IOrder[]>([]);
 
 	useEffect(() => {
 		const fetchOrders = async () => {
@@ -142,6 +148,23 @@ const useOrders = () => {
 		return filtered;
 	}, [allOrders, searchQuery, sortOption, priceRange]);
 
+	useEffect(() => {
+		const totalPages = Math.ceil(
+			filteredAndSortedOrders.length / pagination.itemsPerPage
+		);
+		setPagination((prev) => ({
+			...prev,
+			totalPages: totalPages > 0 ? totalPages : 1,
+			currentPage: 1,
+		}));
+	}, [filteredAndSortedOrders, pagination.itemsPerPage]);
+
+	useEffect(() => {
+		const startIndex = (pagination.currentPage - 1) * pagination.itemsPerPage;
+		const endIndex = startIndex + pagination.itemsPerPage;
+		setPaginatedOrders(filteredAndSortedOrders.slice(startIndex, endIndex));
+	}, [filteredAndSortedOrders, pagination.currentPage, pagination.itemsPerPage]);
+
 	const updateSearchQuery = useCallback((query: string) => {
 		setSearchQuery(query);
 	}, []);
@@ -157,16 +180,42 @@ const useOrders = () => {
 		[]
 	);
 
+	const goToPage = useCallback((page: number) => {
+		setPagination((prev) => ({
+			...prev,
+			currentPage: Math.max(1, Math.min(page, prev.totalPages)),
+		}));
+	}, []);
+
+	const goToNextPage = useCallback(() => {
+		setPagination((prev) => ({
+			...prev,
+			currentPage: Math.min(prev.currentPage + 1, prev.totalPages),
+		}));
+	}, []);
+
+	const goToPrevPage = useCallback(() => {
+		setPagination((prev) => ({
+			...prev,
+			currentPage: Math.max(prev.currentPage - 1, 1),
+		}));
+	}, []);
+
 	return {
-		orders: filteredAndSortedOrders,
+		orders: paginatedOrders,
 		isLoading,
 		error,
 		searchQuery,
 		sortOption,
 		priceRange,
+		pagination,
 		updateSearchQuery,
 		updateSortOption,
 		updatePriceRange,
+		goToPage,
+		goToNextPage,
+		goToPrevPage,
+		totalOrdersCount: filteredAndSortedOrders.length,
 	};
 };
 

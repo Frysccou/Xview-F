@@ -4,7 +4,7 @@ import CartContent from "@/components/views/content/CartContent";
 const CartView: React.FC = () => {
 	return (
 		<Suspense fallback={<div>Cargando carrito...</div>}>
-			<CartContent />
+			<CartContent showTitle/>
 		</Suspense>
 	);
 };

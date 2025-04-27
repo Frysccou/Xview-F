@@ -8,25 +8,25 @@ const CartSummary: React.FC<CartSummaryProps> = ({
 }) => {
 	return (
 		<>
-			<div className="flex justify-between items-center mt-6 pt-6 border-t border-white/10">
+			<div className="flex justify-between items-center mt-8 pt-6 border-t border-white/15">
 				<button
 					onClick={onClearCart}
-					className="px-4 py-2 text-white rounded-md border bg-white/10 border-white/20 hover:bg-white/20"
+					className="px-5 py-2.5 text-sm font-medium text-white/80 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/30"
 				>
 					Vaciar Carrito
 				</button>
-				<div className="text-xl font-bold text-white">
-					Total:{" "}
-					<span className="text-[var(--pastel-salmon)]">
+				<div className="text-right">
+					<span className="block text-sm text-white/70">Total</span>
+					<span className="text-2xl font-bold text-[var(--pastel-salmon)]">
 						${total.toFixed(2)}
 					</span>
 				</div>
 			</div>
 
-			<div className="mt-6">
+			<div className="mt-8">
 				<button
 					onClick={onCheckout}
-					className="w-full px-4 py-3 font-medium rounded-md login-button"
+					className="w-full px-6 py-3 text-base font-semibold rounded-lg login-button transition-transform duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black/50 focus:ring-[var(--pastel-purple)]"
 				>
 					Proceder al Pago
 				</button>

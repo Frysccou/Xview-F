@@ -1,11 +1,12 @@
 import React from "react";
 import { ProductHeaderProps } from "@/types";
+import GradientText from "@/components/ui/GradientText";
 
 const ProductHeader: React.FC<ProductHeaderProps> = ({ product }) => {
 	return (
 		<>
-			<h1 className="mb-2 text-3xl font-bold bg-gradient-to-r from-[var(--pastel-purple)] via-[var(--pastel-salmon)] to-[var(--light-purple)] bg-clip-text text-transparent hover:from-[var(--light-salmon)] hover:via-[var(--light-purple)] hover:to-[var(--pastel-purple)] transition-colors duration-700 md:text-4xl">
-				{product.name}
+			<h1 className="mb-2 text-3xl font-bold md:text-4xl">
+				<GradientText>{product.name}</GradientText>
 			</h1>
 
 			<p className="mb-4 text-xl text-[var(--pastel-salmon)]">

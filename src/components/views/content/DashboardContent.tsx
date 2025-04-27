@@ -9,6 +9,7 @@ import FavoritesSection from "@/components/dashboard/FavoritesSection";
 import LoadingSpinner from "@/components/dashboard/LoadingSpinner";
 import { useRouter } from "next/navigation";
 import { IUser } from "@/types";
+import GradientText from "@/components/ui/GradientText";
 
 export default function DashboardContent() {
 	const { activeTab, setActiveTab } = useTabNavigation("profile");
@@ -29,9 +30,7 @@ export default function DashboardContent() {
 	return (
 		<div className="flex flex-col items-center px-4 py-8 min-h-screen sm:px-6 lg:px-8">
 			<h1 className="mb-6 text-3xl font-bold text-center text-white">
-				<span className="text-5xl text-transparent bg-clip-text bg-gradient-to-r from-[var(--pastel-purple)] to-[var(--pastel-salmon)]">
-					Mi Perfil
-				</span>
+				<GradientText className="text-5xl">Mi Perfil</GradientText>
 			</h1>
 
 			<Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />

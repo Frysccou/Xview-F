@@ -6,6 +6,7 @@ import Card from "../../ui/Card";
 import { IProduct } from "../../../types";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import GradientText from "@/components/ui/GradientText";
 
 const RelatedProductsSection: React.FC<{ currentProductId: number }> = ({
 	currentProductId,
@@ -68,9 +69,7 @@ const RelatedProductsSection: React.FC<{ currentProductId: number }> = ({
 	return (
 		<div className="mb-12 relative px-4 sm:px-8 md:px-12 lg:px-16">
 			<h2 className="mb-8 text-3xl sm:text-4xl font-bold text-center text-white">
-				<span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--pastel-purple)] to-[var(--pastel-salmon)]">
-					Relacionados
-				</span>
+				<GradientText>Relacionados</GradientText>
 			</h2>
 
 			{loading ? (

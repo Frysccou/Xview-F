@@ -248,6 +248,13 @@ const useProductSearch = () => {
 		});
 	}, []);
 
+	const goToPage = useCallback((page: number) => {
+		setPagination((prev) => ({
+			...prev,
+			currentPage: Math.max(1, Math.min(page, prev.totalPages)),
+		}));
+	}, []);
+
 	const goToNextPage = useCallback(() => {
 		setPagination((prev) => ({
 			...prev,
@@ -277,6 +284,7 @@ const useProductSearch = () => {
 		updateSortOption,
 		updatePriceRange,
 		resetFilters,
+		goToPage,
 		goToNextPage,
 		goToPrevPage,
 	};

@@ -4,6 +4,7 @@ import { FeaturedMangasSectionProps } from "@/types";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import SkeletonCardContainer from "../ui/SkeletonCardContainer";
+import { GradientText } from "../ui";
 
 const FeaturedMangasSection = ({
 	mangas,
@@ -46,9 +47,7 @@ const FeaturedMangasSection = ({
 	return (
 		<section className="mb-12 relative px-4 sm:px-8 md:px-12 lg:px-16 w-full max-w-6xl mx-auto">
 			<h2 className="mb-8 text-4xl font-bold text-center text-white md:text-5xl">
-				<span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--pastel-purple)] to-[var(--pastel-salmon)]">
-					Mangas Destacados
-				</span>
+				<GradientText>Mangas Destacados</GradientText>
 			</h2>
 
 			{loading ? (

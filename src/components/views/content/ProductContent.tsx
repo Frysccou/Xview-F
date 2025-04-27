@@ -24,11 +24,32 @@ export default function ProductContent() {
 		updatePriceRange,
 		goToNextPage,
 		goToPrevPage,
+		goToPage,
 	} = useProductSearch();
 	const { handleQuickAddToCart } = useCart();
 
 	if (loading) return <LoadingSpinner />;
 	if (error) return <ErrorDisplay message={error} />;
+
+	const renderPageNumbers = () => {
+		const pageNumbers = [];
+		for (let i = 1; i <= pagination.totalPages; i++) {
+			pageNumbers.push(
+				<button
+					key={i}
+					onClick={() => goToPage(i)}
+					className={`px-3 py-1 mx-1 rounded-md text-sm transition-colors ${
+						pagination.currentPage === i
+							? "bg-gradient-to-r from-[var(--pastel-purple)] to-[var(--pastel-salmon)] text-white font-medium"
+							: "bg-white/10 text-white/70 hover:bg-white/20"
+					}`}
+				>
+					{i}
+				</button>
+			);
+		}
+		return pageNumbers;
+	};
 
 	return (
 		<div className="container mx-auto py-8 px-4">
@@ -64,13 +85,8 @@ export default function ProductContent() {
 								>
 									<ChevronLeft size={20} />
 								</button>
-								<div className="mx-4 text-sm">
-									<span className="bg-gradient-to-r from-[var(--pastel-purple)] to-[var(--pastel-salmon)] bg-clip-text text-transparent font-medium">
-										{pagination.currentPage}
-									</span>{" "}
-									<span className="text-gray-400">
-										de {pagination.totalPages}
-									</span>
+								<div className="mx-2 flex items-center">
+									{renderPageNumbers()}
 								</div>
 								<button
 									onClick={goToNextPage}

@@ -4,13 +4,7 @@ import Image from "next/image";
 
 const OrdersList = ({ orders }: OrdersListProps) => {
 	if (orders.length === 0) {
-		return (
-			<div className="p-4 md:p-6 glass-effect">
-				<div className="p-4 text-center text-white/70 rounded-md border bg-white/5 border-white/10">
-					No hay historial de compras
-				</div>
-			</div>
-		);
+		return null;
 	}
 
 	const formatDate = (dateString: Date) => {
@@ -58,7 +52,7 @@ const OrdersList = ({ orders }: OrdersListProps) => {
 					className="p-4 md:p-6 glass-effect rounded-lg"
 				>
 					<div className="flex flex-col gap-2 md:flex-row md:justify-between md:items-center mb-3 md:mb-4">
-						<h3 className="text-lg md:text-xl font-semibold text-white">
+						<h3 className="text-lg md:text-xl font-semibold text-white"> 
 							Orden #{order.id}
 						</h3>
 						<span
