@@ -557,3 +557,25 @@ input.custom-checkbox + label:hover .custom-checkbox-box {
 .rotate-y-180 {
 	transform: rotateY(180deg);
 }
+
+.btn-repeat-order {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	background: linear-gradient(to right, #c8b6ff, #ffb6b9);
+	color: #121212;
+	font-weight: 500;
+	transition: all 0.3s ease;
+}
+
+.btn-repeat-order:hover {
+	background: linear-gradient(to right, #d8ccff, #ffd1d1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	transform: translateY(-2px);
+}
+
+.btn-repeat-order:active {
+	transform: translateY(0);
+}

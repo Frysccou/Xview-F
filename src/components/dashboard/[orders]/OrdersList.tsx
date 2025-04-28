@@ -5,6 +5,7 @@ import { OrdersListProps, IProduct } from "@/types";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import GradientText from "@/components/ui/GradientText";
+import RepeatOrder from "./RepeatOrder";
 
 const PRODUCTS_PER_PAGE = 3;
 
@@ -203,19 +204,26 @@ const OrdersList = ({ orders }: OrdersListProps) => {
 							)}
 						</div>
 
-						<div className="mt-4 md:mt-6 pt-3 md:pt-4 border-t border-white/10 flex justify-end">
-							<p className="text-base md:text-xl font-bold text-white">
-								Total: $
-								{order.products
-									.reduce((sum, product) => {
-										const quantity =
-											order.productQuantities?.[
-												product.id
-											] || 1;
-										return sum + product.price * quantity;
-									}, 0)
-									.toFixed(2)}
-							</p>
+						<div className="mt-4 md:mt-6 pt-3 md:pt-4 border-t border-white/10 flex justify-between items-center">
+							<div>
+								<RepeatOrder order={order} />
+							</div>
+							<div>
+								<p className="text-base md:text-xl font-bold text-white">
+									Total: $
+									{order.products
+										.reduce((sum, product) => {
+											const quantity =
+												order.productQuantities?.[
+													product.id
+												] || 1;
+											return (
+												sum + product.price * quantity
+											);
+										}, 0)
+										.toFixed(2)}
+								</p>
+							</div>
 						</div>
 					</div>
 				);

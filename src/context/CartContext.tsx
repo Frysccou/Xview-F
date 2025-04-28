@@ -15,7 +15,7 @@ import { AuthContext } from "./AuthContext";
 export interface CartContextType {
 	cartItems: CartItem[];
 	cartCount: number;
-	addToCart: (item: CartItem) => void;
+	addToCart: (item: CartItem, options?: { silent?: boolean }) => void;
 	removeFromCart: (id: number) => void;
 	clearCart: () => void;
 	isInCart: (id: number) => boolean;
@@ -101,14 +101,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 		setCartCurrentPage((prev) => Math.max(prev - 1, 1));
 	}, []);
 
-	const addToCart = (item: CartItem) => {
+	const addToCart = (item: CartItem, options?: { silent?: boolean }) => {
 		if (!isInCart(item.id)) {
 			StorageService.addToCart(item);
 			loadCartItems();
-			showToast({
-				message: `${item.name} añadido al carrito`,
-				type: "success",
-			});
+			if (!options?.silent) {
+				showToast({
+					message: `${item.name} añadido al carrito`,
+					type: "success",
+				});
+			}
 		}
 	};
 
