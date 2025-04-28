@@ -11,13 +11,18 @@ export function middleware(request: NextRequest) {
 		"/cart",
 		"/contact",
 		"/dashboard/orders",
+		"/products",
 	];
 
-	const isProtectedRoute = protectedRoutes.includes(pathname);
+	const isProtectedRoute = protectedRoutes.some((route) =>
+		pathname.startsWith(route)
+	);
 
 	const isInvalidDashboardRoute =
 		pathname.startsWith("/dashboard/") &&
 		!protectedRoutes.includes(pathname);
+
+	const isProductRoute = pathname.startsWith("/products");
 
 	if (isInvalidDashboardRoute) {
 		return NextResponse.rewrite(new URL("/non-existent-page", request.url));
@@ -40,5 +45,12 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/dashboard", "/dashboard/:path*", "/cart", "/contact"],
+	matcher: [
+		"/dashboard",
+		"/dashboard/:path*",
+		"/cart",
+		"/contact",
+		"/products",
+		"/products/:path*",
+	],
 };
