@@ -22,16 +22,28 @@ export interface ProductFilters {
 	};
 }
 
-const useProductSearch = () => {
-	const [allProducts, setAllProducts] = useState<IProduct[]>([]);
-	const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+interface UseProductSearchProps {
+	initialProducts?: IProduct[];
+	initialError?: string | null;
+}
+
+const useProductSearch = ({
+	initialProducts,
+	initialError,
+}: UseProductSearchProps = {}) => {
+	const [allProducts, setAllProducts] = useState<IProduct[]>(
+		initialProducts || []
+	);
+	const [filteredProducts, setFilteredProducts] = useState<IProduct[]>(
+		initialProducts || []
+	);
 	const [paginatedProducts, setPaginatedProducts] = useState<IProduct[]>([]);
 	const [categories, setCategories] = useState<
 		{ id: number; name: string }[]
 	>([]);
 	const [genres, setGenres] = useState<string[]>([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState("");
+	const [loading, setLoading] = useState(!initialProducts && !initialError);
+	const [error, setError] = useState(initialError || "");
 	const [filters, setFilters] = useState<ProductFilters>({
 		categories: [],
 		genres: [],
@@ -45,90 +57,88 @@ const useProductSearch = () => {
 	const [pagination, setPagination] = useState({
 		currentPage: 1,
 		itemsPerPage: 6,
-		totalPages: 1,
+		totalPages: initialProducts ? Math.ceil(initialProducts.length / 6) : 1,
 	});
 
 	const parseGenres = (genresData: unknown): string[] => {
 		if (!genresData) return [];
-		
+
 		if (Array.isArray(genresData)) {
 			return genresData;
 		}
-		
+
 		if (typeof genresData === "string") {
 			try {
 				const parsed = JSON.parse(genresData);
 				return Array.isArray(parsed) ? parsed : [];
 			} catch {
-				return genresData.split(",").map(g => g.trim());
+				return genresData.split(",").map((g) => g.trim());
 			}
 		}
-		
+
 		return [];
 	};
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				setLoading(true);
+	const processInitialData = useCallback((productsData: IProduct[]) => {
+		setAllProducts(productsData);
+		setFilteredProducts(productsData);
+		setPagination((prev) => ({
+			...prev,
+			totalPages: Math.ceil(productsData.length / prev.itemsPerPage),
+		}));
 
-				const productsData = await ApiService.getProducts();
-
-				setAllProducts(productsData);
-				setFilteredProducts(productsData);
-				setPagination((prev) => ({
-					...prev,
-					totalPages: Math.ceil(
-						productsData.length / prev.itemsPerPage
-					),
-				}));
-
-				const categoryMap = new Map<number, string>();
-				const categoryNames: Record<number, string> = {
-					1: "Shonen",
-					2: "Seinen",
-					3: "Shojo",
-				};
-
-				productsData.forEach((product) => {
-					if (
-						product.categoryId &&
-						!categoryMap.has(product.categoryId)
-					) {
-						const name =
-							categoryNames[product.categoryId] ||
-							`Categoría ${product.categoryId}`;
-						categoryMap.set(product.categoryId, name);
-					}
-				});
-
-				const extractedCategories = Array.from(categoryMap).map(
-					([id, name]) => ({ id: Number(id), name })
-				);
-				setCategories(extractedCategories);
-
-				const uniqueGenres = new Set<string>();
-
-				productsData.forEach((product) => {
-					if (product.genres) {
-						const productGenres = parseGenres(product.genres);
-						productGenres.forEach(genre => uniqueGenres.add(genre));
-					}
-				});
-
-				setGenres(Array.from(uniqueGenres).sort());
-			} catch {
-				setError("Error al cargar los datos");
-			} finally {
-				setLoading(false);
-			}
+		const categoryMap = new Map<number, string>();
+		const categoryNames: Record<number, string> = {
+			1: "Shonen",
+			2: "Seinen",
+			3: "Shojo",
 		};
 
-		fetchData();
+		productsData.forEach((product) => {
+			if (product.categoryId && !categoryMap.has(product.categoryId)) {
+				const name =
+					categoryNames[product.categoryId] ||
+					`Categoría ${product.categoryId}`;
+				categoryMap.set(product.categoryId, name);
+			}
+		});
+
+		const extractedCategories = Array.from(categoryMap).map(
+			([id, name]) => ({ id: Number(id), name })
+		);
+		setCategories(extractedCategories);
+
+		const uniqueGenres = new Set<string>();
+		productsData.forEach((product) => {
+			if (product.genres) {
+				const productGenres = parseGenres(product.genres);
+				productGenres.forEach((genre) => uniqueGenres.add(genre));
+			}
+		});
+		setGenres(Array.from(uniqueGenres).sort());
+		setLoading(false);
 	}, []);
 
 	useEffect(() => {
-		if (!allProducts.length) return;
+		if (initialProducts && initialProducts.length > 0) {
+			processInitialData(initialProducts);
+		} else if (!initialError && !initialProducts) {
+			const fetchData = async () => {
+				try {
+					setLoading(true);
+					const productsData = await ApiService.getProducts();
+					processInitialData(productsData);
+				} catch {
+					setError("Error al cargar los datos");
+					setLoading(false);
+				}
+			};
+			fetchData();
+		}
+	}, [initialProducts, initialError, processInitialData]);
+
+	useEffect(() => {
+		if (!allProducts.length && !loading) return;
 
 		let result = [...allProducts];
 
@@ -148,9 +158,11 @@ const useProductSearch = () => {
 		if (filters.genres.length > 0) {
 			result = result.filter((product) => {
 				if (!product.genres) return false;
-				
+
 				const productGenres = parseGenres(product.genres);
-				return filters.genres.some(genre => productGenres.includes(genre));
+				return filters.genres.some((genre) =>
+					productGenres.includes(genre)
+				);
 			});
 		}
 
@@ -197,7 +209,7 @@ const useProductSearch = () => {
 			currentPage: 1,
 			totalPages: Math.ceil(result.length / prev.itemsPerPage),
 		}));
-	}, [allProducts, filters]);
+	}, [allProducts, filters, loading]);
 
 	useEffect(() => {
 		const { currentPage, itemsPerPage } = pagination;

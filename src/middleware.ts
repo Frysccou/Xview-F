@@ -22,8 +22,6 @@ export function middleware(request: NextRequest) {
 		pathname.startsWith("/dashboard/") &&
 		!protectedRoutes.includes(pathname);
 
-	const isProductRoute = pathname.startsWith("/products");
-
 	if (isInvalidDashboardRoute) {
 		return NextResponse.rewrite(new URL("/non-existent-page", request.url));
 	}

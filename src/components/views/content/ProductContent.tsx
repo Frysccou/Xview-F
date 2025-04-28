@@ -9,8 +9,17 @@ import CatalogHeader from "@/components/products/CatalogHeader";
 import useProductSearch from "@/hooks/products/useProductSearch";
 import useCart from "@/hooks/products/useCart";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { IProduct } from "@/types";
 
-export default function ProductContent() {
+interface ProductContentProps {
+	initialProducts: IProduct[];
+	initialError: string | null;
+}
+
+export default function ProductContent({
+	initialProducts,
+	initialError,
+}: ProductContentProps) {
 	const {
 		paginatedProducts,
 		categories,
@@ -25,7 +34,7 @@ export default function ProductContent() {
 		goToNextPage,
 		goToPrevPage,
 		goToPage,
-	} = useProductSearch();
+	} = useProductSearch({ initialProducts, initialError });
 	const { handleQuickAddToCart } = useCart();
 
 	if (loading) return <LoadingSpinner />;

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import DashboardContent from "@/components/views/content/OrdersContent";
+import OrdersContent from "@/components/views/content/OrdersContent";
 
 export default function OrdersView() {
 	return (
@@ -8,7 +8,7 @@ export default function OrdersView() {
 				<div className="p-4 text-center">Cargando Órdenes...</div>
 			}
 		>
-			<DashboardContent />
+			<OrdersContent />
 		</Suspense>
 	);
 }

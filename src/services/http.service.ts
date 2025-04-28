@@ -18,7 +18,7 @@ export const HttpService = {
 				...headers,
 			},
 			...(body ? { body: JSON.stringify(body) } : {}),
-			cache: "no-store"
+			cache: "no-store",
 		};
 
 		const response = await fetch(url, requestOptions);
@@ -41,19 +41,11 @@ export const HttpService = {
 		return HttpService.request<T>(url, { headers });
 	},
 
-	post: <T>(url: string, body: Record<string, unknown>, headers = {}): Promise<T> => {
+	post: <T>(
+		url: string,
+		body: Record<string, unknown>,
+		headers = {}
+	): Promise<T> => {
 		return HttpService.request<T>(url, { method: "POST", body, headers });
-	},
-
-	put: <T>(url: string, body: Record<string, unknown>, headers = {}): Promise<T> => {
-		return HttpService.request<T>(url, { method: "PUT", body, headers });
-	},
-
-	patch: <T>(url: string, body: Record<string, unknown>, headers = {}): Promise<T> => {
-		return HttpService.request<T>(url, { method: "PATCH", body, headers });
-	},
-
-	delete: <T>(url: string, headers = {}): Promise<T> => {
-		return HttpService.request<T>(url, { method: "DELETE", headers });
 	},
 };
