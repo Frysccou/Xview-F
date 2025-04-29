@@ -1,6 +1,7 @@
 import React from "react";
-import { IUser, UserInfoCardProps } from "@/types";
+import { UserInfoCardProps } from "@/types";
 import LogoutButton from "./LogoutButton";
+import LoyaltyBadge from "./LoyaltyBadge";
 
 const UserInfoCard = ({ user, onLogout }: UserInfoCardProps) => {
 	return (
@@ -14,8 +15,9 @@ const UserInfoCard = ({ user, onLogout }: UserInfoCardProps) => {
 					<label className="block mb-2 text-sm font-medium text-white">
 						Nombre
 					</label>
-					<div className="px-4 py-3 w-full text-white rounded-md border bg-white/10 border-white/20">
-						{user.name || "No disponible"}
+					<div className="flex items-center justify-between px-4 py-3 w-full text-white rounded-md border bg-white/10 border-white/20">
+						<span>{user.name || "No disponible"}</span>
+						<LoyaltyBadge />
 					</div>
 				</div>
 

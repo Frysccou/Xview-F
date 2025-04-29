@@ -31,6 +31,7 @@ export interface IUser {
 	address: string;
 	phone: string;
 	role: Role;
+	orders?: IOrder[];
 }
 
 export interface IOrder {
@@ -71,6 +72,7 @@ export interface AuthContextType {
 	login: (data: LoginData) => Promise<LoginResponse | undefined>;
 	register: (data: RegisterData) => Promise<LoginResponse | undefined>;
 	logout: () => void;
+	updateUser: (updatedUser: Partial<IUser>) => void;
 	error: string | null;
 }
 

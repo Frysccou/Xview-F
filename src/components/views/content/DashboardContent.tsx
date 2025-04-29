@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "@/components/ui/Sidebar";
 import useUserData from "@/hooks/dashboard/useUserData";
 import useTabNavigation from "@/hooks/dashboard/useTabNavigation";
@@ -16,12 +16,17 @@ export default function DashboardContent() {
 	const { user, loading, handleLogout } = useUserData();
 	const router = useRouter();
 
+	useEffect(() => {
+		if (!loading && !user) {
+			router.push("/login");
+		}
+	}, [loading, user, router]); 
+
 	if (loading) {
 		return <LoadingSpinner />;
 	}
 
 	if (!user) {
-		router.push("/login");
 		return null;
 	}
 
@@ -46,7 +51,7 @@ export default function DashboardContent() {
 						<FavoritesSection />
 					</>
 				) : (
-					<></>
+					<></> 
 				)}
 			</div>
 		</div>

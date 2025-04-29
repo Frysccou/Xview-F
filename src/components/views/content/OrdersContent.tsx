@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/ui/Sidebar";
 import useUserData from "@/hooks/dashboard/useUserData";
@@ -32,12 +32,17 @@ export default function OrdersContent() {
 	} = useOrders();
 	const router = useRouter();
 
+	useEffect(() => {
+		if (!userLoading && !user) {
+			router.push("/login");
+		}
+	}, [userLoading, user, router]);
+
 	if (userLoading || ordersLoading) {
 		return <LoadingSpinner />;
 	}
 
 	if (!user) {
-		router.push("/login");
 		return null;
 	}
 

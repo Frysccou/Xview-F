@@ -24,6 +24,7 @@ export const AuthContext = createContext<AuthContextType>({
 		return undefined;
 	},
 	logout: () => {},
+	updateUser: () => {},
 	error: null,
 });
 
@@ -130,6 +131,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		setUser(null);
 	};
 
+	const updateUser = (updatedUser: Partial<IUser>) => {
+		setUser((currentUser) => {
+			if (currentUser) {
+				const newUser = { ...currentUser, ...updatedUser };
+				StorageService.setUserData(newUser);
+				return newUser;
+			}
+			return null;
+		});
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -139,6 +151,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				login,
 				register,
 				logout,
+				updateUser,
 				error,
 			}}
 		>

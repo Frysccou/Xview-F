@@ -5,12 +5,14 @@ import { ApiService } from "@/services/api.service";
 import { showToast } from "@/components/ui/Toast";
 import usePaymentForm from "./usePaymentForm";
 import useCart from "@/hooks/useCart";
+import useAuth from "@/hooks/useAuth";
 
 const useCheckout = () => {
 	const [showCheckout, setShowCheckout] = useState(false);
 	const router = useRouter();
 	const { paymentInfo, formErrors, handleInputChange, validateForm } = usePaymentForm();
 	const { cartItems, clearCart } = useCart();
+	const { user, updateUser } = useAuth();
 
 	const proceedToCheckout = () => {
 		setShowCheckout(true);
@@ -51,6 +53,11 @@ const useCheckout = () => {
 			await ApiService.createOrder({
 				products: productsWithQuantity,
 			});
+
+			const updatedOrders = await ApiService.getUserOrders();
+			if (user) {
+				updateUser({ orders: updatedOrders });
+			}
 
 			clearCart();
 			setShowCheckout(false);
