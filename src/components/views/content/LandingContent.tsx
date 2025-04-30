@@ -1,4 +1,5 @@
-import { GradientText, ButtonPrimary, ButtonSecondary } from "@/components/ui";
+import ActButtons from "@/components/landing/ActButtons";
+import { GradientText } from "@/components/ui";
 
 export default function LandingContent() {
 	return (
@@ -13,10 +14,7 @@ export default function LandingContent() {
 					definitivo para los mejores mangas en español.
 				</p>
 
-				<div className="flex flex-col gap-4 justify-center sm:flex-row">
-					<ButtonPrimary href="/login">Iniciar Sesión</ButtonPrimary>
-					<ButtonSecondary href="/home">Novedades</ButtonSecondary>
-				</div>
+				<ActButtons />
 			</div>
 		</main>
 	);
